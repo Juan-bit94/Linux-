@@ -28,3 +28,12 @@
 - When the super-server recives a request for a service from a client, it spawns the appropriate service program.
 - The internet daemon (inetd) application was the original super server program. The inetd program ran as a daemon, it listens for specific requests from clients and launching the appropriate service program when needed.
 - The inetd program uses the /etc/inetd.conf configuration file to allow you to define the services for which it handles requests.
+## Extended internet daemon (xinetd)
+- The extended internet daemon (xinetd) application is an advanced version of inetd.
+- It too launches service programs as requested by clients, but it contains additional features, such as access control lists (ACLs), advanced logging features, and the ability to set schedules to turn services on and off at different times of the day or week.
+## Listening for Clients
+- A standard linux server supports lots of services. Usually, a single Linux server will support multiple services at the same time.
+- This means multiple clients will be making requests to the server for multiple services. The trick is in getting requests from clients to the correct server service.
+- Each service, whether it's running as a daemon or running from a super-server, uses a separate network protocol to communicate with its clients.
+- The network prtocol for a service defines exactly how network clients communicate with the service, using preassigned network ports. Ports are defined within the TCP and UDP standards to help separate network traffic going to the same IP address.
+- A host of Linux services are available for serving applications to clients on the network. The /etc/services file contains all of the ports defined on a Linux server. 
