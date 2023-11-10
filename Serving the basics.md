@@ -29,4 +29,6 @@
 - The following sections discuss the three most popular open source database servers you'll encounter when working in the Linux environment.
 ### The PostgreSQL Server
 - The PostgreSQL Server was implemented as a complete object-relational database management system to rival the popular commercial database servers.
-- PostgreSQL is known for its advanced database features. It follows the standard atomicity
+- PostgreSQL is known for its advanced database features. It follows the standard atomicity, consistency, isolation, and durability (ACID) guidelines used by commercial databases and supports many of the fancy features you would expect to find in commercial relational database server.
+- Such as transactions, updatable views, triggers, foreign keys, functions, and stored procedures.
+- The PostgreSQL is very versatile, but with 
