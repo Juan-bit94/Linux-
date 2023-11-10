@@ -61,4 +61,6 @@
 - The most popular SNMP software package in Linux is the open source net-snmp package. This has SNMPv3 compatibility, allows you securely monitor all aspects of a Linux server remotely.
 ## Time
 - For many network applications to work correctly, both servers and clients need to have their internal clocks coordinated with the same time.
-- The Network Time Protocol (NTP) 
+- The Network Time Protocol (NTP) accomplishes this, it allows servers and clients to synchronize on the same time source across multiple networks, adding or subtracting fractions of a second as needed to stay in sync.
+- For Linux systems, the ntpd program synchronizes a Linux system with remote NTP servers on the Internet.
+- It's common to have a single Linux server use ntpd to synchronize with a remote time standard server and then have all other servers and clients on the local network sync their times to the local linux server. 
