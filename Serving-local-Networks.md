@@ -25,4 +25,40 @@
 - The ability to share network printers has become a requirement for most offices and has also become popular in many home environments. 
 - The standard Linux print sharing software package is called the Common Unix Printing System (CUPS).
 - The CUPS software allows a Linux system to connect to any printer resource, either loccally or via a network, using a common application interface that operates over a dedicated printer drivers.
-- 
+- The key to CUPS is the printer driver and the use of Internet Printing Protocol (IPP). The CUPS system also allows you to share a locally attached printer with other Linux systems.
+## Network Resource Servers
+- Running a local network requires quite a few different resources to keep clients and servers in sync. Linux provides a few different service packages that network administrators can use to make their lives easier.
+### IP Addresses
+- Every device on a local network must have a unique IP address to interact with other devices on the network. To help simplify this, developers have created the Dynamic Host Configuration Protocol (DHCP).
+- A central DHCP server keeps track of the IP addresses assigned, ensuring that no two clients receive the same IP address.
+- The most popular Linux DHCP server package is maintained by the Internet Systems Consortium (ISC) and is called DHCPd.
+  - Once you have the DHCPd server running on your network, you'll need to tell your Linux clients to use it to obtain their network addresses.  This requires DHCP client software packages.
+  - For Linux DHCP clients, there are three popular packages that you can use
+    - dhclient
+    - dhcpcd
+    - pump
+-  Most Debian and Red hat based distributions use the dhclient package and even install it by default when a network card is detected during the installation process.
+## Logging
+- Linux maintains log files that record various key details about the system as it runs. The log files are normally stored locally in the /var/log directory.
+- In network environment it can come in handy to have Linux servers store their system logs on a remote logging server.
+- A remote logging server provides a safe backup of the original log files, plus a safe place to store logs in case of a system crash or a break-in by an attacker.
+- There are two main logging packages used in Linux, and which one system uses depends on the startup software it uses.
+  - rsyslogd: The SysVinit and Upstart utilizes the journald service for both local and remote logging of system information.
+  - journald: The Systemd system utilizes the journald service for both local and remote logging of system information.
+- Both rsyslogd and journald use configuration files that allow you to define just how data is logged and what clients the server accepts log messages from.
+## Name Servers
+- DNS maps IP addresses to a host naming scheme on networks. A DNS server acts as a directory lookup to find the names of servers on the local network.
+- Linux servers use the BIND software package to provide DNS naming services. The main program in BIND is named, the server daemon that runs on Linux servers and resolves hostnames to IP addresses for clients on the local network.
+- This allows clients to point to only one DNS name server and be able to resolve any IP address on the Internet.
+## Network Management
+- The Simple Network Management Protocol (SNMP) provides a way for an administrator to query remote network devices and servers to obtain information about their configuration, status, and even perforance.
+- SNMP operates in a simple client/server paradigm.
+- Network devices and servers run an SNMP server service that listens for requests from SNMP client packages. The SNMP client sends requests for data from the SNMP server.
+- The SNMP standards have changed over the years
+  - SNMPv1: provided for only simple password authentication of clients and passed all data as individual plaintext records.
+  - SNMPv2: Implemented basic level of security and provided for the bulk transmission of monitoring data to help reduce the network traffic required to monitor devices.
+  - SNMPv3: current version, utilizes both strong authentication and data encryption capabilities and provides a more streamlined management system.
+- The most popular SNMP software package in Linux is the open source net-snmp package. This has SNMPv3 compatibility, allows you securely monitor all aspects of a Linux server remotely.
+## Time
+- For many network applications to work correctly, both servers and clients need to have their internal clocks coordinated with the same time.
+- The Network Time Protocol (NTP) 
