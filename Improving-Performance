@@ -1,0 +1,17 @@
+# Improving Performance
+- There are three common methods for improving performance that all Linux administrators should be aware of
+  1. Clustering
+  2. Load Balancing 
+  3. Containers
+## Clustering 
+- A computer cluster improves application performance by dividing application functions among multiple servers.
+- Each server node in the cluster is configured the same and can perform the same functions, but the cluster management software determines how to split the application functions among the servers.
+- The cluster management software is the key to the performance of the cluster. Newer versions of clustering include the Apache Hadoop project and the Linux Virtual Server (LVS) project.
+## Load Balancing 
+- Load balancing is a special application of clustering. A load balancer redirects entire client requests to one of a cluster of servers. While a single server processes the entire request, the client load is distributed among the multiple servers automatically.
+- Common Linux load-balancing packages include HAProxy, the Linux Virtual Server (LVS), and even the nginX web server.
+## Containers
+- One of the biggest problems for application developers is creating a development environment that mirrors the actual server environment the applications run in.
+- Linux containers help solve this problem by creating a self-contained environment to encapsulate applications. A container packages all of the necessary application files, library files, and operating system libraries into a bundle that you can easily move between environments.
+- Several Linux server packages are available that support containers. Currently the two most popular ones are Docker and Kubernetes.
+- You can use these packages to easily port application containers to any Linux server, whether it's a physical server, a virtual server, or in the cloud.
