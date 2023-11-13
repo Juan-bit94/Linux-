@@ -2,3 +2,60 @@
 - Files on a Linux system are stored within a single directory structure called a virtual directory.
 - The virtual directory contains files from all the computer's storage devices and merges them into a single directory structure. This structure has a single base directory called the root directory, which is often simply called root.
 - Often one of the first skills learned at the command line is how to navigate the virtual directory structure as well as how to create directories and remove them.
+- Viewing files, creating them, copying and moving them, and deleting them are also important skills.
+## Viewing and Creating Files
+- The most basic command for viewing a file's name and its various metadata is the list (ls) command. Metadata is information that describes and provides additional details about data.
+- To issue the list command, you type ls and any needed options or arguments. The basic syntax structure for the list command is:
+  - ls [OPTION]... [FILE]...
+- In the list command's syntax structure, [OPTION] means there are various options (also called switches) you can add to display different file metadata.
+- The [FILE] argument shows that you can add a directory or filename to the commands end to look at metadata for either specific files or files within other virtual directory structure locations. Also optional.
+- When you issue the ls command with no additional arguments or options, it displays all the files and subdorectories names within the present working directory
+- The ls command's commonly used options
+  - a: all, display all file and subdirectory names, including hidden files names.
+  - d: directory, show a directory's own metadata instead of its contents.
+  - F: classify, classify each file's type using an indicator code (*,/,=,>,@, or |)
+  - i: inode, display all file and subdirectory names along with their associated index number.
+  - l: this displays file and subdirectory metadata, which includes file types, file access permissions, hard link count, file owner, file's group, modification date and time, and filename.
+  - R: show a directory's contents, and for any subdirectory within the original directory tree, consecutively show their contents as well (recursively).
+- Be aware that some distributions include, by default, as alias for the ls -l command. It is ll.
+- The touch command will allow you to create empty files on the fly. This command's primary purpose in life is to update a file's timestamps-access and modification. It is useful in that you can quickly create files with which to experiment.
+- With touch command you can create a single file or multiple files at a time.
+  - Example: touch file1.txt file2.txt file3.txt (this will create 3 files)
+- Directories are sometimes called folders. From a user perspective, a directory contains files, but in reality a directory is a special file used to locate other files. A file for which the directory is responsible has some of its metadata stored within the directory file.
+- This metadata includes the file's name along with the file's associated index (inode) number. Therefore, a file can be located via its managing directory.
+- You can quickly create directories by using the mkdir command. The -F option on the ls command will help you in this endeavor. It displays any directories, including newly created ones, with a /indicator code following each directory's name.
+- Be aware when building directories that a few problems can occur. Specifically this can happen when attempting to create a directory tree.
+  - Use the following to avoid issues:
+    - mkdir -p Projects/42/
+    - This command mkdir with the option -p will allow the creation of sub directories.
+- It is tedious to enter the ls -F command after each time you issue the mkdir command to ensure that the directory was built. Instead, use the -v option on the mkdir command to receive verification that the directory was successfully constructed.
+## Copying and Moving Files
+- Copying, moving, and renaming files and directories are essential skills. There are several nuances between the commands to complete these tasks that are important for you to know.
+- To copy a file or directory locally, use the cp command. The basic syntax structure for the command is:
+  - cp [OPTION]... SOURCE DEST
+  - The source and destination are required.
+  - Example: cp melodrama.txt 
+- There are several useful cp command options.
+  - a: archive, perform a recursive copy and keep all the files original attributes, such as permissions, ownership, and timestamps.
+  - f: force, overwrite any preexisting destination files with the same name as DEST.
+  - i: interactive, ask before overwriting any preexisting destination files with the same name as DEST.
+  - n: no clobber, do not overwrite any preexisting destination files with the same name as DEST.
+  - R, r: recursive, copy a directory's contents, and for any subdirectory within the original directory tree, consecutively copy its contents as well (recursive).
+  - u: update, only overwrite preexisting destination files with the same name as DEST if the source file is newer.
+  - v: verbose, provide detailed command action information as command executes.
+- To move or rename a file or directory locally, you use a single command: mv. The command's basic syntax is nearly the same as the cp command:
+  - mv [OPTION]... SOURCE DEST
+- The commonly used mv command options are similar to cp command options.
+  - f: force: Overwrite any preexisting destination files with the same name as DEST.
+  - i: interactive: ask before overwriting any preexisting destination files with the same name as DEST.
+  - n: no clobber,  do not overwrite any preexisting destination files with the same name as DEST.
+  - u: update, only overwrite preexisting destination files with the same name as DEST if the source file is newer.
+  - v: verbose, provide detailed command action information as the command executes.
+- When renaming an entire directory, there are no additional required command options. Just issue the mv command as you would for renaming a file.
+- You can move a file and rename it all in one simple mv command.
+  - mv Emphasis/risk-taking.txt Story-Topics/risks.txt
+- For lighting-fast copies of big files or when you are copying large groups of files, the remote sync utility is rather useful. This tool is often used to create backups, can securely copy files over a network, and is accessed via the rsync command.
+- When you're copying files over a network to a remote host, the file transfer process typically needs protection via encryption methods. The rsync command can be tunneled through OpenSSH to provide data privacy. Also, the scp command can be employed to provide a secure file copy mechanism.
+- To quickly copy a file locally, the rsync command syntax is similar to the mv command's syntax. It is as follows:
+  - rsync [OPTION]... SOURCE DEST
+         
