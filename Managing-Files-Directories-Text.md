@@ -58,4 +58,46 @@
 - When you're copying files over a network to a remote host, the file transfer process typically needs protection via encryption methods. The rsync command can be tunneled through OpenSSH to provide data privacy. Also, the scp command can be employed to provide a secure file copy mechanism.
 - To quickly copy a file locally, the rsync command syntax is similar to the mv command's syntax. It is as follows:
   - rsync [OPTION]... SOURCE DEST
-         
+- Certain rsync options will assist you in making quick file copies. Certain switches are helpful for copying large files or creating backups locally, so it's a good idea to review the commonly used rsync option.
+  - a: archive: Use archive mode.
+  - D: Retain device and special files.
+  - g: group: Retain file's group.
+  - h: human readable: Display any numeric output in human-readable format.
+  - l: links: Copy symbolic links as symbolic links.
+  - o: owner: Retain file's owner.
+  - p: perms: Retain file's permissions
+  - progress: Display progression of file copy process.
+# Linking Files and Directories
+- Understanding file and directory links is an essential part of your Linux journey. while many quickly pick up how to link files they do not necessarily understand the underlying link structure.
+- There are two types of links. One is a symbolic link, which is also called a soft link. The other is a hard link, and we'll take a look at it first.
+## Establish a Hard Link
+- A hard link is a file or directory that has one index (inode) number but  at least two different filenames. Having a single inode number means that it is a single data file on the filesystem.
+- Having two or more names means the file can be accessed in multiple ways. The hard link has two file names, one inode number, and therefore one filesystem location residing on a disk partition. Thus, the file has two names but is physically one file.
+- A hard link allows you to have a pseudo-copy of a file without truly copying its data. This is often used in file backups where not enough filesystem space exists to backup the file's data. If someone deletes one of the file's names, you still have another filename that links to its data.
+- To create a hard link, use theln command. For hard links, the original file must exist prior to issuing the ln command. The linked file must not exist. It is created when the command is issued.
+- The inode numbers for the files can be checked using the ls -i command, and you can see that the numbers are the same for both files.
+- If you want to remove a linked file but not the original file, use the unlink command. Just type unlink at the command line and include the linked filename as an argument.
+- When creating and using hard links, there are a few important items to remember:
+  - The original file must exist before you issue the ln command.
+  - The second file listed in the ln command must not exist prior to issuing the command.
+  - An original file and its hard links share the same inode number.
+  - An original file and its hard links share the same data.
+  - An original file and any of its hard links can exist in different directories.
+  - An original file and its hard links must exist on the same filesystem.
+## Constructing a Soft Link
+- Typically, a soft link file provides a pointer to a file that may reside on another filesystem. The two files do not share inode numbers because they do not point to the same data.
+- To create a symbolic link, the ln command is used with the -s option.
+- You can see via the ls -i command that soft-linked files do not share the same inode number, unlike hard linked files. Also, soft-linked files do not experience a link count increase.
+- Sometimes you have a soft-linked file that points to another soft-linked file. If you want to quickly find the final file, use the readlink -f command and pass one of the soft-linked filenames as an argument to it. The readlink utility will display the final file's name and directory location.
+- When creating and using soft links, keep a few things in mind:
+  - The original file must exist before you issue the ln -s command.
+  - The second file listed in the ln -s command must not exist prior to issuing the command.
+  - An original file and its soft links do not share the same inode number.
+  - An original file and its soft links do not share the same data.
+  - An original file and any of its soft links can exist in different directories.
+  - An original file and its soft links can exist in different filesystems.
+- Stale links can be a serious security problem. A stale link, sometimes called a dead link, is when a soft link points to a file that was deleted or moved. If a malicious file is put in the original file's place, your server's security could be compromised. Use symbolic links with caution and employ the unlink command if you need to remove a linked file.
+# Reading Files
+- Linux systems contain many text files. They include configuration files, log files, data files, and so on. Understanding how to view these files is a basic but important skill. 
+## Reading Entire Text Files
+- The basic utility for viewing entire text files is the concatenate (cat) command. 
