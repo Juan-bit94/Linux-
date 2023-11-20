@@ -101,3 +101,13 @@
 - Linux systems contain many text files. They include configuration files, log files, data files, and so on. Understanding how to view these files is a basic but important skill. 
 ## Reading Entire Text Files
 - The basic utility for viewing entire text files is the concatenate (cat) command. 
+- Use the cat command with the basic syntax:
+  - cat [OPTION]... [FILE]...
+- There is a handy new clone of the cat command called bat.
+- Another useful command to view entire text files is the pr command. Its original use was to format text files for printing.
+- To view a small text file, use pr command with the basic syntax:
+  - pr [OPTION]... [FILE]...
+  - The pr command's useful file display option
+    - n, columns: Displays the file in cloumn format.
+    - l n, length: Change the default 66-line page length to n lines long.
+    - m, merge: When displaying multiple files, displays them in parallel, with one file in each column, and truncate the file lines.   
