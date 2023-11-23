@@ -111,3 +111,75 @@
     - n, columns: Displays the file in cloumn format.
     - l n, length: Change the default 66-line page length to n lines long.
     - m, merge: When displaying multiple files, displays them in parallel, with one file in each column, and truncate the file lines.   
+    - s, c, separator: Change the default column separator from tab to c.
+    - t,omit header: Do not display any file header or trailers.
+    - w, n: width: Change the default 72-character page width to n characters wide.
+- There is a pr command that displays a file text as well.
+    -  example: pr -tl numbers.txt
+- Where the pr utility really shines is displaying two short text files at the same time. You can quickly view the files side by side.
+    - example: pr -mtl 15 numbers.txt random.txt
+- If yoy want to display two files side by side and do not care how sloppy the output is, you can use the paste command.
+- When a text file is larger than your output screen, if you use commands such as cat and pr, text may scroll off the screen. Fortunately, there are several utilities that allow you to read portions of a text file.
+## Reading Text File Portions
+- If you just want to read a single file line or a small portion of a file, use the grep utility to help you find a file line(s) that contain certain text strings.
+- The basic syntax for the grep command:
+    - grep [OPTIONS] pattern [FILE...]
+- When searching for a particular text string, you use the string for PATTERN in the command's syntax and the file you are searching as FILE.
+- Example of using the grep command to find a file line
+    - grep christine /etc/passwd
+              -    or
+    - grep -i christine /etc/passwd
+- Be aware that the grep utility pays attention to case. If the string you enter does not match a string exactly within the file, the grep command will return nothing.
+- If you employ the -i (or --ignore-case) switch, grep will search for any instance of the string disregarding case.
+- Another handy tool for displaying portions of a text file is the head utility. The head command's syntax is as follows:
+    - head [OPTION]... [FILE]...
+- A good command option to try allows you to override the default behavior of only displaying a file's first 10 lines. The switch to use is either -n followed by an argument.
+    - head -n 2 /etc/passwd
+- Note that the -n 2 switch and argument used with the head command display only the file's first two line. You can also eliminate the file's bottom lines by using a negative argument with the -n switch
+    - head -n -40 /etc/passwd
+- If you want to display the file's last lines instead of its first lines, employ the tail utility. Its general syntax is similar to the head commands syntax
+    - tail [OPTION]... [FILE]...
+- One of the most useful tail utility features is its ability to watch log files. Log files typically have new messages appended to the file's bottom. Use the -f switch on the tail command and provide the log filename to watch as the command's argument. You will see a few recent log file entries immediately.
+- Some log files have been replaced on various Linux distributions, and now the messages are kept in a journal file managed by journald. To watch messages being added to the journal file, use the journalctl --follow command.
+- To end your monitoring session using tail, you must use the Control+C key combination.
+    - example: sudo tail -f /var/log/auth.log
+- To follow along, your Linux distribution may not have the /var/log/auth.log file. Try the /var/log/secure file instead.
+## Reading Text File Pages
+- One way to read through a large file's text is by using a pager. A pager utility allows you to view one text page at a time and move through the text at your own pace.  The two commonly used pagers are the more and less utilities
+- The more utility is a nice little pager utility. You can move forward through a text file by pressing the spacebar or the Enter key. You cannot move backward through a file.
+- A more flexible pager is the less utility. While similar to the more utility in that you can move through a file a page (or line) at a time, this pager utility also allows you to move backward.
+- The less page utility allows faster file traversal because it does not read the entire file prior to displaying the file's first page. You can also employ the up and down arrow keys to traverse the file as well as the spacebar to move forward a page and the Esc+V key combination to move backward a page. You can search for a particular word within the file by pressing the ? key, typing in the word you want to find, and pressing Enter to search backward.
+- You can replace ? with the / key to search forward. By default, the Linux man page utility uses less as its pager. Learning the less utility's commands will allow you to search through various man pages with ease.
+# Finding Information
+- There are many ways to find various types of information on your linux system.
+## Viewing File Information
+- It's not uncommon to look through a directory and see files you're not familiar with, or perhaps even forgot why they're there. Linux has a couple of handy commands that can help you out with that.
+- The file command can provide basic information about the file type of a specified file.
+    - example: file mystest
+    - mytest: Bourne-Again shell script, ASCII text executable
+- The output from the file command shows that Linux recognizes the mytest file as a shell script file, in ASCII text format, and as an executable file.
+- If you'd like to see information about when a file was created, modified, or last accessed, use the stat command. 
+    - example: stat mytest
+- The stat command provides basic information about the file, such as the file's name, size, inode number, and the physical device it's stored on. It also provides harder-to-find information such as the last time the file was accessed and modified.
+## Exploring File Differences
+- A handy command to explore text file differences is the diff command. It allows you to make comparisons between two files. line by line. The basic syntax for the command is:
+    - diff [OPTION]... FILES
+- With the diff utility you can perform a veriety of comparisons. In addition, you can format the output to make the results easier for viewing.
+- This table shows a few commonly used options.
+      - e,--ed: Create an ed script, which can be used to make the first file compared the same as the second file compared.
+      - q,--brief: If files are different, issue a simple message expressing this.
+      - r, --recursive: Compare any subdirectories within the original directory tree, and consecutively compare their contents and the subdirectories as well (recursive).
+      - s,--report-identical-files: If files are the same, issue a simple message expressing this.
+      - w,--width n: Display a width maximum of n characters for output.
+      - y,--side-by-side: Display output in two columns.
+- The diff utility provides more than just differences; it also denotes what needs to be appended, changed, or deleted to make the first file identical to the second file. To see the exact differences between the files and any needed modifications, remove the -q switch.
+- The diff command's output can be a little confusing. In the example, the first output line displays 2, 3c2, 3. This output tells you that to make the first file, numbers.txt, just like the second file, random.txt, you will need to change the numbers.txt file's lines 2 through 3 to match the random.txt file's lines 2 through 3. The output's next six lines show each file's text content that does not match, separated by a dashed line. Next, the 5c5 designates that line 5 in numbers.txt needs to be changed to match line 5 in the random.txt file.
+- The letter c in the diff utility's output denotes that changes are needed. You may also see an a for any needed additions or d for any needed deletions.
+## Using Simple Pinpoint Commands
+- Commands that quickly locate (pinpoint) files are very useful. They allow you to determine if a particular utility is installed on your system, locate a needed configuration file, find helpful documentation, and so on.
+- The which command shows you the full path name of a shell command passed as an argument.
+    - example: which diff
+    - /usr/bin/diff
+- The which command is used to find the diff command's program location. The command displays the full path name of /usr/bin/diff.
+- Note: Environment variables are configuration settings that modify your process's environment. When you type in a command (program) name, the PATH variable sets the directories Linux will search for the program binary. It is also used by other commands, such as the which utility. Note that directory names are separated by a colon(:) in the PATH list.
+- 
