@@ -182,4 +182,55 @@
     - /usr/bin/diff
 - The which command is used to find the diff command's program location. The command displays the full path name of /usr/bin/diff.
 - Note: Environment variables are configuration settings that modify your process's environment. When you type in a command (program) name, the PATH variable sets the directories Linux will search for the program binary. It is also used by other commands, such as the which utility. Note that directory names are separated by a colon(:) in the PATH list.
-- 
+- The which command is also handy for quickly determining if a command is using an alias.
+- Another simple pinpoint command is the whereis utility. This utility allows you to not only locate any command's program binaries but also locate source code files as well as any man pages.
+    - Example: whereis diff
+    - diff: /usr/bin/diff /usr/share/man/man1/diff.1.gz
+    - /usr/share/man/man1p/diff.1p.gz
+- The example above, the command issued searches for program binaries, source code files, and man pages for diff utility.
+- A handy and simple utility to use in finding files is the locate program. This utility searches a database, mlocate.db, which is located in the var/lib/mlocate/ directory, to determine if a particular file exists on the local system. The basic syntax for the locate command is as follows:
+      - locate [OPTION]... PATTERN...
+- The locate command's commonly used options
+    - A,--all: Display filenames that match all the patterns, instead of displaying files that match only one pattern in the pattern list.
+    - b,--basename: Display only file names that match the pattern and do not include any directory names that match the pattern.
+    - c,--count:  Display only the number of files whose name matches the pattern instead of displaying file names.
+    - i,--ignore-case: Ignore case in the pattern for matching filenames.
+    - q,--quiet: Do not display any error messages, such as permission denied, when processing.
+    - r,--regexp R: Use the regular expression, R, instead of the pattern list to match filenames.
+    - w,--wholename: Display filenames that match the pattern and include any directory names that match the pattern. This is default behavior.
+- To find a file with the locate command, just enter locate followed by the filename. If the file is on your system and you have permission to view it, the locate utility will display the file's directory path and name.
+- Using the locate command PATTERN can be a little tricky, due to default pattern file globbing. File globbing occurs when you use wildcards, such as an asterisk (*) or a question mark (?), added to a filename argument in a command, and the filename is expanded into multiple names.
+- If you don't enter any wildcards into your pattern, the locate command, by default, adds wildcards to the pattern. SO if you enter the pattern, passwd, it is automatically turned into *passwd*. Thus if you just want to search for the base name passwd, with no file globbing, you must add quotation marks (single or double) around the pattern and precede the pattern and the \ character.
+- Note: If you do not have permission to view a directory's contents, the locate command cannot show files that match your PATTERN, which are located in that directory. Thus, you may have some files missing from your display.
+- Keep in mind that the locate command's PATTERN is really a pattern list. So, you can add additional patterns.
+- Another problem you can run into deals with newly created or downloaded files. The locate utility is really searching the mlocate.db database as opposed to searching the virtual directory structure. This database is typically updated only one time per day via a cron job. Therefore, if the file is newly created, locate won't find it.
+- The mlocate.db database is updated via the updatedb utility. You can run it manually using super privileges if you need to find a newly created or downloaded file.
+## Using intricate Pinpoint Commands
+- While using simple commands to locate files is useful, they don't work in situations where you need to find files based on things such as metadata.
+- The find command is flexible. It allows you to locate files based on data, such as who owns the file, when the file was last modifiedm permission set on the file, and so on. The Basic command syntax is:
+    - find [PATH...] [OPTION] [EXPRESSION]
+- The PATH argument is a starting point directory, because you designate a starting point in a directory tree and find will search through that directory and all its subdirectories (recursively) for the file or files you seek. You can use a single period (.) to designate your present working directory as the starting point directory.
+- Note: There are also options for the find command itself that handle such items as following or not following links and debugging. In addition, you can have a file deleted or a command executed if a particular file is located.
+- The EXPRESSION command argument and its preceding OPTION control what type of metadata filters are applied to the search as well as any settings that may limit the search.
+- The find utility has many features.
+    - cmin, n: Display names of files whose status changed n minutes ago.
+    - empty: Display names of files that are empty and are a regular text file or directory.
+    - gif, n: Display names of files whose group id is equal to n.
+    - group, name: Display names of files whose group is name.
+    - inum, n: Display names of files whose inode number is equal to n.
+    - maxdepth, n: When searching for files, traverse down into the starting point directory's tree only n levels.
+    - mmin, n: Display names of files whose data changed n minutes ago.
+    - name, pattern: Display names of files whose name matches pattern. Many regular expression arguments may be used in the pattern and need to be enclosed in quotation marks to avoid unpredictable results. Replace -name whith -iname to ignore case.
+    - nogroup: Display names of files where no group name exists for the file's group ID.
+    - nouser: Display names of files where no username exists for the file's user ID.
+    - perm, mode: Display names of files whose permissions matches mode. Either octal or symbolic modes may be used.
+    - size, n: Display names of files whose size matches n. Suffixes can be used to make the size more human readable such as G for gigabytes.
+    - user, name: Display names of files whose owner is name.
+- The find command is handy for auditing your system on a regular basis as well as when you are concerned that your server has been hacked. The -perm option is useful for one of these audit types.
+- Earlier in this chapter we briefly covered the grep command for the purpose of reading a portion of a text file. You can also use this clever utility to search for files on your system.
+- Support it has been a while since you last modified your /etc/nsswitch.conf configuration file. A problem arises that requires you to make a change to the host: setting within the file and you can't remember its exact name. Instead of digging around using the ls command, just employ the grep command
+    - sudo grep -d skip hosts: /etc/*
+    - /etc/nsswitch.conf:hosts:        files[...]
+- The grep command is used to search all the files within the /etc/ directory for the hosts: setting. the -d skip option is used to skip any directory files in order to eliminate messages concerning them. The grep utility displays the configuration filename, followed by a colon (:) and the file's line where the setting is located. If you are not sure where in the /etc/ directory tree the configuration file is placed, you can tack on the -R (or -r, or --recursive) option to recursively search through the specified directory tree. If you don't have permission to search through various files, the grep command will issue annoying error messages.
+## Summary
+- Being able to effectively and swiftly use the right commands at the shell command line is important for your daily job. It allows you to solve problems, manage filesm gather information, persue text files and so on. 
