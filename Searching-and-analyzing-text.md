@@ -1,0 +1,33 @@
+# Searching and Analyzing Text
+- Managing a Linux server involves many important steps and decisions based on data. Trying to gather the information you need in an agile and efficient manner is crucial.
+- There are many Linux structures and tools that can help you incover the knowledge you seek.
+## Processing Text Files
+- Once you have found or created a text file, you may need to process it in some way to extract needed information. Understanding how to filter and format text will assist you in this endeavor.
+## Filtering Text
+- To sift through the data in a large text file, it helps to quickly extract small data sections. The cut utility is a handy tool for doing this. It will allow you to view particular fields within a file's records. The command's basic syntax is as follows:
+    - cut OPTION... [FILE]...
+- Before we delve into using this command, here are a few basics you should understand about the cut command:
+    - ### Text File Records:
+    - A text file record is a single file line that ends in a newline linefeed, which is the ASCII character LF. You can see if your text file uses this end-of-line character via the cat -E command. It will display every newline linefeed as a $. If your text file records end in the ASCII character NUL, you can also use cut on them, but you must use the -z option.
+    - ### Text File Record Delimiter:
+    - For some of the cut command options to be properly used, fields must exist within each text file record. These fields are not database-style fields but instead data that is separated by some delimiter. A delimiter is one or more characters that create a boundary between different data items within a record. A single space can be a delimiter. The password file, /etc/passwd, uses colons (:) to separate data items within a record.
+    - ### Text File Changes:
+    - Contrary to its name, the cut command does not change any data within the text file. It simply copies the data you wish to view and displays it to you. Rest assured that no modifications are made to the file.
+- The cut utility has a few options you will use on a regular basis.
+      - c, characters nlist: Display only the record characters in the nlist
+      - b, bytes blist: Display only the record bytes in the blist.
+      - d, delimiter: Designate the records's field delimiter as d. This overrides the tab default delimiter. Put d within quatation marks to avoid unexpected results.
+      - f, fields flist: Display only the record's fields denoted by flist
+      - s, only delimited: Display only records that contain the designated delimiter.
+      - z, zero terminated: Designate the record end-of-line character as the ASCII character NUL.
+- A few cut commands in action will help demonstrate its capabilities.
+    - cut -d ":" -f 1,7 /etc/passwd
+    - cut -c 1-5 /etc/passwd
+- This text file employs colons (:) to delimit the fields within each record. The first use of the cut command designates the colon delimiter using the d option. Notice that the colon is encased in quotation makrs to avoid unexpected results. The -f option is used to specify that only fields 1 (username) and 7 (shell) should be displayed.
+- The second example uses the -c option, in this case, the nlist argument is set to 1-5, so every records first five characters are displayed.
+- #### Note: Occasionally it is worthwhile to save a cut command's output. You can do this by redirecting standards output, which is covered later in this chapter.
+-  Another nice tool for filtering text is our old friend the grep command. The grep command is powerful in its use of regular expressions, which will really help with filtering text files.
+    - The grep command's commonly used options
+      - c, count: Display a count of text file records that contain a PATTERN match.
+      - d, directories-action: When a file is a directory, if action is set to read, read the directory as if it were a regular text file; if action is set to skip, ignore the directory; and if action is set to recurse, act as if the -R, -r, or --recursive option was used.
+      - E, extended-regexp:    
