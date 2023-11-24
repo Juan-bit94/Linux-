@@ -30,4 +30,26 @@
     - The grep command's commonly used options
       - c, count: Display a count of text file records that contain a PATTERN match.
       - d, directories-action: When a file is a directory, if action is set to read, read the directory as if it were a regular text file; if action is set to skip, ignore the directory; and if action is set to recurse, act as if the -R, -r, or --recursive option was used.
-      - E, extended-regexp:    
+      - E, extended-regexp: Designate the PATTERN as an extended regular expression.
+      - i, --ignore-case: ignore the case in the PATTERN as well as in any text file records.
+      - R, -recursive: Search a directory's contents, and for any subdirectory within the original directory tree, consecutively search its contents as well.
+      - v, invert-match: Display only text files records that do not contain a PATTERN match.
+- Many commands use regular expressions. A regular expression is a pattern template you define for utility, such as grep, which uses the pattern to filter text. Basic regular expressions (BREs) include characters such as a dot followed by an asterisk, to represent multiple characters and a signle dot to represent one character.
+- They also use brackets to represent multiple characters, such as [a,e,i,o,u] or a range of characters, such as [A-z]. To find text file records that begin with particular characters, you can precede them with a caret (^) symbol. For finding text file records where particular characters are at the record's end, append a dollar sign ($) symbol to them.
+- #### Note: You will see in documentation and technical descriptions different names for regular expressions. The name may be shortended to regex or regexp.
+- Extended regular expressions (EREs) allow more complex patterns. For example, a vertical bar symbole (|) allows you to specify two possible words or character sets to match you can also employ parentheses to designate additional subexpressions.
+- ## Formatting Text
+- Often to understand the data within text files, you need to reformat file data in some way. There are a couple of simple utilities you can use to do this.
+- The sort utility sorts a file's data. Keep in mind it makes no changes to the original file. Only the output is sorted. The basic syntax of this command is as follows"
+        - sort [OPTION]... [FILE]...
+- If you want to order a file's content using the system's standard sort order, simply enter the sort command followed by the name of the file you wish to sort.
+- If a file contains numbers, the data may not be in the order you desire using the sort utility. To obtain proper numeric order, add the -n option to the command.
+- #### The sort command's commonly used options
+        - c, check: Check if file is already sorted. Produces no output if file is sorted. If file is not sorted, it displays the file name, the line number, the keyword disorder, and the first unordered line's text.
+        - f, ignore-case: Consider lowercase characters as uppercase characters when sorting.
+        - k n1, key=n1: Sort the file using the data in the n1 field. May optionally specify a second sort field by following n1 with a comma and specifying n2. Field delimiters are spaces by default.
+        - M, month-sort: Display text in month of the year order. Months must be listed as standard three letter abbreviations, such as JAN, FEB, and so on.
+        - n, numeric-sort: Display text in numerical order.
+        - o, output=file: Create a new sorted file named file.
+        - r, reverse: Display text in reverse sort order.
+- The sort utility is handy for formatting a small text file to help you understand the data it contains. Another useful command for formatting small text files is one we've already touched on: the cat command.      
