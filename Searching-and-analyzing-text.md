@@ -44,7 +44,7 @@
         - sort [OPTION]... [FILE]...
 - If you want to order a file's content using the system's standard sort order, simply enter the sort command followed by the name of the file you wish to sort.
 - If a file contains numbers, the data may not be in the order you desire using the sort utility. To obtain proper numeric order, add the -n option to the command.
-- #### The sort command's commonly used options
+#### The sort command's commonly used options
         - c, check: Check if file is already sorted. Produces no output if file is sorted. If file is not sorted, it displays the file name, the line number, the keyword disorder, and the first unordered line's text.
         - f, ignore-case: Consider lowercase characters as uppercase characters when sorting.
         - k n1, key=n1: Sort the file using the data in the n1 field. May optionally specify a second sort field by following n1 with a comma and specifying n2. Field delimiters are spaces by default.
