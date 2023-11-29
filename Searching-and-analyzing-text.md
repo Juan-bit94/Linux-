@@ -135,3 +135,13 @@
 ## Creating Command Lines
 - Creating command line commands is a useful skill. There are several different methods you can use. One such method is using the xargs utility.
 - By piping STDOUT from other commands into the xargs utility, you can build command-line commands on the fly.
+- For example: $ find tmp -size 0 | xargs /usr/bin/ls
+    - The first command finds any file in the tmp subdirectory that are empty (-size 0). The second command does the same thing except this time, the output from the find command is piped as STDIN into the xargs utility. The xargs command uses the ls command to list the files.
+    - While the example is educational, it is not practical because you get the same information just using the find utility.
+- This is an example of a functional use of xargs: $find tmp -size 0 | xargs -p /usr/bin/rm
+    - The xargs command used the -p option that causes the xargs utility to stop and ask permission before enacting the constructed command-line command. This command is a way to find and remove unwanted files.
+- The other method of creating comman-line commands on the fly is to use shell expansion.
+    - Example: $ ls $(find tmp -size 0)
+    - Because the command is encased by the $() symbols, it does not display to STDOUT. Instead, the filenames are passed to the ls utility, which does display the files to STDOUT.
+- The next method is to execute with backticks(`).
+    - Example: $ ls `find tmp -size 0`, they are not popular because the ` is hard to see.    
