@@ -145,3 +145,24 @@
     - Because the command is encased by the $() symbols, it does not display to STDOUT. Instead, the filenames are passed to the ls utility, which does display the files to STDOUT.
 - The next method is to execute with backticks(`).
     - Example: $ ls `find tmp -size 0`, they are not popular because the ` is hard to see.    
+## Editing Text Files
+- Manipulating text is performed on a regular basis when managing a linux system. You employ either a stream editor, or a full fledged interactive text editor to accomplish the task.
+## Appreciating text editors
+- We will cover both nano and the vim text editors.
+- The nano editor is a good text editor to start using if you have never dealt with an editor or have only used GUI editors.
+- To start the nano text editor, type nano followed by the name of the file.
+- You will see four main sections of the nano text editor
+    - Title Bar: The title bar is at the nano text editor windows top line. It shows the current editor version as well as the name of the file you are editing. Uf you typed nano and did not include a filename, you would see new buffer in the title bar.
+    - Main Body: The nano text editor's main body is where you perform the editing. If the file already contains text, its first lines are shown in this area. If you need to view text that is not in the main body, you can use either arrow keys, the Page up or Page down key.
+    - Status Bar: The status bar does not always contain information. It only displays the status infromation during certain events.
+    - Shortcut List: This is one of the editor's most useful features. You can see the most common commands and their associated shortcut keys.
+- The nano text editor is wonderful to use for simple text file modifications. However, if you need a more powerful text editor for creating programs or shell scripts, the vim editor is a popular choice.
+- To start the vim text editor, type vim or vi followed by the filename
+- The vim editor loads the file data in a memory buffer, and this buffer is displayed on the screen. If you open vim without a filename or the filename you entered doesn't yet exist, vim starts a new buffer area for editing.
+- The vim editor has a message area near the bottom line. If you have just opened an already created file, it will display the filename along with the number of lines and characters read into the buffer area. If you are creating a new file, you will see [new file] in the message area.
+- The vim editor has three standard modes as follows:
+    - Command Mode: This mode vim uses when you first enter the buffer area; this is sometimes called normal mode. Here you enter keystrokes to enact commands. Pressing the J key will move your cursor down one line for example. This is the best mode to use for quick navigation around the buffer area.
+    - Insert Mode: Insert mode is also called edit or entry mode. This is the mode where you can perform simple editing. You enter this mode by pressing the I key, at that point you will see --Insert-- message be display in the message area. You can leave this mode by pressing the Esc key.
+    - Ex mode: This mode is sometimes called colon commands because every command entered here is preceded by a colon (:). For example, to leave the vim editor and not save any changes you type :q and press enter.
+- Since you start in command mode when entering the vim editor's buffer area, it's good to understand a few of the commonly used commands to move around in this mode.
+-    
