@@ -165,4 +165,28 @@
     - Insert Mode: Insert mode is also called edit or entry mode. This is the mode where you can perform simple editing. You enter this mode by pressing the I key, at that point you will see --Insert-- message be display in the message area. You can leave this mode by pressing the Esc key.
     - Ex mode: This mode is sometimes called colon commands because every command entered here is preceded by a colon (:). For example, to leave the vim editor and not save any changes you type :q and press enter.
 - Since you start in command mode when entering the vim editor's buffer area, it's good to understand a few of the commonly used commands to move around in this mode.
--    
+- For example, when you move your cursor to a word's first letter and press CW, the word is deleted, and you are thrown into insert mode.
+- Once you have made any needed text changes in the vim buffer area, it's time to save your work. You can type zz in the command mode to write the buffer to disk and exit your process from the vim editor.
+- The third vim mode, Ex mode, has additional handy commands. You must be in command mode to enter into Ex mode. You cannot jump from insert mode to Ex mode. Therefore, if you're currently in insert mode, press the Esc key to go back to command mode first.
+    - #### Commonly used vim command mode moving commands
+        - h : move cursor left one character.
+        - i : move cursor right one character.
+        - j : move cursor down one line.
+        - k : move cursor up one line.
+        - w : move cursor forward one word to front of next word.
+        - e : move cursor to end of current word.
+        - b : move cursor backward one word.
+        - ^ : move cursor to beginning of line
+        - $ : move cursor to end of line.
+        - gg : move cursor to the file's first line.
+        - G : move cursor to the file's last line.
+        - nG : move cursor to file line number n.
+        - Ctrl+B : scroll up almost one full screen.
+        - Ctrl+F : scroll down almost one full screen.
+        - Ctrl+U : scroll up half of a screen.
+        - Ctrl+D : scroll down half of a screen
+        - Ctrl+Y : scroll up one line.
+        - Ctrl+E : scroll down one line.
+- There are a lot of obscure commands to know, however, some people love the vim editor because its is so powerful.
+    - #### Commonly used vim Ex mode commands
+        -    
