@@ -189,4 +189,32 @@
         - Ctrl+E : scroll down one line.
 - There are a lot of obscure commands to know, however, some people love the vim editor because its is so powerful.
     - #### Commonly used vim Ex mode commands
-        -    
+        -    :x  Write buffer to file and quit editor.
+        -    :wq Write buffer to file and quit editor
+        -    :wq! Write buffer to file and quit editor (overrides protection)
+        -    :w Write buffer to file and stay in editor
+        -    :! command Execute shell command and display results, but don't quit editor.
+        -    :r! command Execute shell command and include the results in editor buffer area
+        -    :r file Read file contents and include them in editor buffer area.
+- Knowing at least two text editor will be useful to your day to day Linux work. For simple modifications, the nano text editor shines. For more complex editing, the vim editor is king. Both are worth your time to master.
+- ## Learning about Stream Editors
+- There are times where you will want to edit text files without having to pull out a full-fledged text editor. In these cases, learning about two very popular stream editors is worthwhile.
+- A stream editor modifies text that is passed to it via a file or output from a pipeline. The editor uses special commands to make text changes as the text "streams" through the editor utility.
+- The first stream editor we will explore is called the stream editor. The command to invoke it is sed.
+- The sed utility edits a stream of text data based on a set of commands you supply ahead of time.
+- The process the editor goes through is as follows:
+        - Reads one text line at a time from the input stream
+        - Matches that text with the supplied editor commands
+        - Modifies the text as specified in the commands
+        - Outputs the modified text to STDOUT
+- Its important to understand the command's basic syntax. It is as follows:
+- sed [OPTIONS] [SCRIPT]... [FILENAME]
+- By default, sed will use the text from STDIN to modify according to prespecified commands.
+- Example:
+- $ echo "I like cake." | sed 's/cake/donuts/'
+- I like donuts.
+- Notice in the example that the text output from the echo command is piped as input into the stream editor.
+- The sed utility's command (substitute) specifies that if the first text string, cake, is found, it is changed to donuts in the output.
+- Note that the entire command after sed is considered to be the SCRIPT, and it is encased in single quotation marks.
+- The gawk utility is also a stream editor, but it provides a more powerful editing process through its programming language. With the gawk programming language, you can do the following:
+- 1.    
